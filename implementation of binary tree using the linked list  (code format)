@@ -1,0 +1,55 @@
+/*
+        printf("Node is not present\n");
+        return false;
+    }
+}
+
+// Perform level order traversal of the binary tree
+void levelOrder(struct node *root) {
+    if (root == NULL)
+        return;
+
+    struct Queue *queue = createQueue(100);
+    enQueue(queue, root);
+
+    while (!isEmpty(queue)) {
+        struct node *temp = deQueue(queue);
+        printf("%d ", temp->data);
+
+        if (temp->left)
+            enQueue(queue, temp->left);
+
+        if (temp->right)
+            enQueue(queue, temp->right);
+    }
+    printf("\n");
+}
+
+int main() {
+    int limit, data1;
+    struct node *root = NULL;
+    struct Queue *queue = createQueue(100); // Assuming a maximum of 100 nodes
+
+    printf("Enter the limit to form binary tree: ");
+    scanf("%d", &limit);
+
+    for (int i = 0; i < limit; i++) {
+        printf("Enter node: ");
+        scanf("%d", &data1);
+        insert(&root, data1, queue);
+    }
+
+    printf("Level order traversal before deletion\n");
+    levelOrder(root);
+
+    int data;
+    printf("Enter data to delete: ");
+    scanf("%d", &data);
+    if (deleteNode(&root, data)) {
+        printf("Level order traversal after deletion\n");
+        levelOrder(root);
+    }
+
+    return 0;
+}
+
